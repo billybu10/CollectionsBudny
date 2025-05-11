@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CollectionsBudny.Pages.MainPage"
+             Shell.BackgroundColor="{StaticResource Primary}"
+             Shell.TitleColor="White"
+             >
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add Collection" Command="{Binding AddCollectionCommand}" IconImageSource="{FontImage Glyph='+', Color=White, Size=22}"  />
+        <ToolbarItem Text="Edit Items" Command="{Binding BrowseItemsCommand}" IconImageSource="{FontImage Glyph='✏️', Color=White, Size=22}" />
+    </ContentPage.ToolbarItems>
+    <ScrollView>
+        <VerticalStackLayout Padding="10" Margin="0">
+            <CollectionView ItemsSource="{Binding CollectionsViewModel.AllCollections}"
+            Margin="20"
+            SelectionMode="None"
+            WidthRequest="1000"
+            >
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate WidthRequest="1000">
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="auto, *, auto, auto, auto" ColumnSpacing="10">
+                            <Label Text="{Binding Name}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Margin="10" HorizontalOptions="End" FontSize="22" FontAttributes="Bold"/>
+                            <Label Grid.Column="1"  Text="{Binding Description}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  Margin="10" HorizontalOptions="Start" FontSize="22"/>
+                            <Button Grid.Column="2"
+                                    Text="Edit"
+                                    Command="{Binding EditCommand}"
+                                    BackgroundColor="{StaticResource Secondary}"/>
+                            <Button Grid.Column="3"
+                                    Text="Go to summary"
+                                    Command="{Binding SummaryCommand}" 
+                                    BackgroundColor="{StaticResource Secondary}"/>
+                            <Button Grid.Column="4"
+                                    Text="Delete"
+                                    Command="{Binding DeleteCommand}" 
+                                    BackgroundColor="{StaticResource Secondary}"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

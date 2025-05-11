@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CollectionsBudny.Pages.SummaryPage"
+             Title="Summary Page"
+             Shell.BackgroundColor="{StaticResource Primary}"
+             Shell.TitleColor="White">
+    <VerticalStackLayout>
+        <Label Text="{Binding CollectionSummaryViewModel.Name, StringFormat='Collection Name: {0}'}" FontSize="40" FontAttributes="Bold" HorizontalOptions="Center" />
+        <Label Text="{Binding CollectionSummaryViewModel.NumberOwned, StringFormat='Number of items owned: {0}'}" FontSize="22" HorizontalOptions="Center"/>
+        <Label Text="{Binding CollectionSummaryViewModel.NumberForSale, StringFormat='Number of items for sale: {0}'}" FontSize="22" HorizontalOptions="Center"/>
+        <Label Text="{Binding CollectionSummaryViewModel.NumberSold, StringFormat='Number of items sold: {0}'}" FontSize="22" HorizontalOptions="Center"/>
+    </VerticalStackLayout>
+</ContentPage>

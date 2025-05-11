@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CollectionsBudny.Pages.CollectionPage"
+             xmlns:viewModels="clr-namespace:CollectionsBudny.ViewModels"
+             Title="CollectionPage"
+             Shell.BackgroundColor="{StaticResource Primary}"
+             Shell.TitleColor="White">
+    <ContentPage.BindingContext>
+        <viewModels:CollectionViewModel />
+    </ContentPage.BindingContext>
+    <VerticalStackLayout Padding="10" Margin="0" WidthRequest="300">
+        <Entry Placeholder="Enter name of the collection"
+            Text="{Binding Name}"
+            Margin="10"
+            WidthRequest="300"
+            HorizontalOptions="Center"
+               />
+        <Editor Placeholder="Enter description of the collection"
+                Text="{Binding Description}"
+                Margin="10"
+                WidthRequest="300"
+                HorizontalOptions="Center"/>
+        <Label Text="{Binding IncorrectDataString}" TextColor="Red"
+               Margin="10"
+               WidthRequest="300"
+               HorizontalOptions="Center"
+               HorizontalTextAlignment="Start"
+               VerticalTextAlignment="Center"/>
+        <Button Text="Save" 
+                Command="{Binding SaveCommand}" 
+                BackgroundColor="{StaticResource Secondary}" 
+                Margin="10"
+                WidthRequest="300"
+                HorizontalOptions="Center" 
+                IsEnabled="{Binding IsAllOk}"/>
+    </VerticalStackLayout>
+</ContentPage>

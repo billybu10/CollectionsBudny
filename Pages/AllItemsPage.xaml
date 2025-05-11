@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CollectionsBudny.Pages.AllItemsPage"
+             Title="AllItemsPage"
+             Shell.BackgroundColor="{StaticResource Primary}"
+             Shell.TitleColor="White">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem  Text="Add Item" Command="{Binding NewItemCommand}" IconImageSource="{FontImage Glyph='+', Color=White, Size=22}" />
+    </ContentPage.ToolbarItems>
+    <VerticalStackLayout  Padding="10" Margin="0">
+        <Picker Title="Select Collection" 
+                x:Name="selectedCollection" 
+                ItemDisplayBinding="{Binding Collection.Name}" 
+                ItemsSource="{Binding CollectionItemsViewModels}"
+                Margin="20"
+                WidthRequest="800"/>
+        <CollectionView
+            BindingContext="{Binding Source={x:Reference selectedCollection}, Path=SelectedItem}"
+            ItemsSource="{Binding Items}"
+            x:Name="collectionsCollection"
+            Margin="20"
+            SelectionMode="None"
+            WidthRequest="800">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid ColumnDefinitions="auto, auto, auto, auto, auto, auto, *, auto" ColumnSpacing="10">
+                        <Image Grid.Column="0" Source="{Binding Image}" WidthRequest="100" HeightRequest="100" Aspect="AspectFit"></Image>
+                        <Label Grid.Column="1" Text="{Binding Name}" HorizontalOptions="End" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Margin="10" FontSize="22">
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" Binding="{Binding IsSold}" Value="true">
+                                    <Setter Property="TextColor" Value="Gray" />
+                                    <Setter Property="Opacity" Value="0.5" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                        <Label Grid.Column="2" Text="{Binding Price, StringFormat='{0:F2}'}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Margin="10" HorizontalOptions="End" FontSize="22" FontAttributes="Bold">
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" Binding="{Binding IsSold}" Value="true">
+                                    <Setter Property="TextColor" Value="Gray" />
+                                    <Setter Property="Opacity" Value="0.5" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                        <Label Grid.Column="3" Text="{Binding State}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Margin="10" HorizontalOptions="End" FontSize="22" FontAttributes="Bold">
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" Binding="{Binding IsSold}" Value="true">
+                                    <Setter Property="TextColor" Value="Gray" />
+                                    <Setter Property="Opacity" Value="0.5" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                        <Label Grid.Column="4" Text="{Binding Rating, StringFormat='{0}/10'}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Margin="10" HorizontalOptions="End" FontSize="22" FontAttributes="Bold">
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" Binding="{Binding IsSold}" Value="true">
+                                    <Setter Property="TextColor" Value="Gray" />
+                                    <Setter Property="Opacity" Value="0.5" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                        <Label Grid.Column="5" Text="{Binding Comment}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Margin="10" HorizontalOptions="End" FontSize="22" FontAttributes="Bold">
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" Binding="{Binding IsSold}" Value="true">
+                                    <Setter Property="TextColor" Value="Gray" />
+                                    <Setter Property="Opacity" Value="0.5" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                        <Button Grid.Column="6"
+                                    Text="Edit"
+                                    Command="{Binding EditCommand}" 
+                                    BackgroundColor="{StaticResource Secondary}"
+                                    HorizontalOptions="End">
+                            <Button.Triggers>
+                                <DataTrigger TargetType="Button" Binding="{Binding IsSold}" Value="true">
+                                    <Setter Property="BackgroundColor" Value="Gray" />
+                                </DataTrigger>
+                            </Button.Triggers>
+                        </Button>
+                        <Button Grid.Column="7"
+                                    Text="Delete"
+                                    Command="{Binding DeleteCommand}" 
+                                    BackgroundColor="{StaticResource Secondary}"
+                                    HorizontalOptions="End">
+                            <Button.Triggers>
+                                <DataTrigger TargetType="Button" Binding="{Binding IsSold}" Value="true">
+                                    <Setter Property="BackgroundColor" Value="Gray" />
+                                </DataTrigger>
+                            </Button.Triggers>
+                        </Button>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </VerticalStackLayout>
+</ContentPage>

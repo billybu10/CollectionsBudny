@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:CollectionsBudny"
+             x:Class="CollectionsBudny.Pages.ItemPage"
+             Title="ItemPage"
+             Shell.BackgroundColor="{StaticResource Primary}"
+             Shell.TitleColor="White">
+    <ContentPage.Resources>
+        <local:CollectionVMToIDConverter x:Key="CollectionVMToIDConverter" />
+    </ContentPage.Resources>
+    <VerticalStackLayout Padding="10" Margin="0" WidthRequest="300">
+        <Entry Placeholder="Enter item's name"
+        Text="{Binding ItemViewModel.Name}"
+        Margin="10"
+        WidthRequest="300"
+        HorizontalOptions="Center"/>
+        <Entry Placeholder="Enter item's price"
+        Text="{Binding ItemViewModel.Price}"
+        Keyboard="Numeric"
+        Margin="10"
+        WidthRequest="300"
+        HorizontalOptions="Center"/>
+        <HorizontalStackLayout WidthRequest="300">
+            <Picker Title="Select state"
+                    Margin="10"
+                    WidthRequest="280"
+                    HorizontalOptions="Center"
+                    x:Name="statePicker" 
+                    SelectedItem="{Binding ItemViewModel.State}">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>New</x:String>
+                        <x:String>Used</x:String>
+                        <x:String>For Sale</x:String>
+                        <x:String>Sold</x:String>
+                        <x:String>Want To Buy</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+        </HorizontalStackLayout>
+        <Entry Placeholder="Enter item's rating"
+        Text="{Binding ItemViewModel.Rating}"
+        Keyboard="Numeric"
+        Margin="10"
+        WidthRequest="300"
+        HorizontalOptions="Center"/>    
+        <Button
+        BackgroundColor="{StaticResource Secondary}"
+        x:Name="ImagePickerButton"
+        Clicked="ImagePickerButton_Clicked"
+        Text="Pick Image" 
+        Margin="10"
+        WidthRequest="300"
+        HorizontalOptions="Center" />
+
+        <HorizontalStackLayout WidthRequest="300">
+            <Picker Title="Select Collection" 
+                    x:Name="collectionPicker" 
+                    Margin="10"
+                    WidthRequest="280"
+                    HorizontalOptions="Center"
+                    ItemsSource="{Binding CollectionsViewModel.AllCollections}" 
+                    ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding ItemViewModel.Collection, Mode=TwoWay, Converter={StaticResource CollectionVMToIDConverter}}"/>
+        </HorizontalStackLayout>
+        
+        <Entry Placeholder="Enter item's comment"
+        Text="{Binding ItemViewModel.Comment}"
+        Margin="10"
+        WidthRequest="300"
+        HorizontalOptions="Center"/>
+        
+
+        <Label Text="{Binding ItemViewModel.IncorrectDataString}" TextColor="Red"
+               Margin="10"
+               WidthRequest="300"
+               HorizontalOptions="Center"
+               HorizontalTextAlignment="Start"
+               VerticalTextAlignment="Center"/>
+        <Button Text="Save" 
+                Clicked="SaveButton_Clicked" 
+                BackgroundColor="{StaticResource Secondary}" 
+                IsEnabled="{Binding ItemViewModel.IsAllOk}"
+                Margin="10"
+                WidthRequest="300"
+                HorizontalOptions="Center" />
+    </VerticalStackLayout>
+</ContentPage>
