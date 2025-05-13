@@ -55,7 +55,7 @@ namespace CollectionsBudny.Models
 
         public void Delete()
         {
-            if (!File.Exists(Path.Combine(FileSystem.AppDataDirectory, Collection + ".items.txt")))
+            if (File.Exists(Path.Combine(FileSystem.AppDataDirectory, Collection + ".items.txt")))
             {
                 string strOldText;
                 string n = "";
