@@ -222,6 +222,7 @@ namespace CollectionsBudny.ViewModels
 
         private async Task Save()
         {
+            _item.Delete();
             _item.Save();
             await Shell.Current.GoToAsync($"..?saved={_item.ID}");
         }

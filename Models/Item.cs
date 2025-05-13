@@ -40,7 +40,7 @@ namespace CollectionsBudny.Models
             string tempDataString = ID + ";" + Name + ";" + Price.ToString() + ";" + State + ";" + Rating.ToString() + ";" + Image + ";" + Collection + ";" + Comment + ";\n";
 
             var lines = File.ReadLines(Path.Combine(FileSystem.AppDataDirectory, Collection + ".items.txt"));
-            if (lines.Any(x => x.Split(",")[0] == ID))
+            if (lines.Any(x => x.Split(";")[0] == ID))
             {
                 string oldline = lines.Where(x => x.Split(",")[0] == ID).Single();
                 string tempFileContent = File.ReadAllText(Path.Combine(FileSystem.AppDataDirectory, Collection + ".items.txt"));
@@ -55,10 +55,18 @@ namespace CollectionsBudny.Models
 
         public void Delete()
         {
-            string tempDataString = ID + ";" + Name + ";" + Price.ToString() + ";" + State + ";" + Rating.ToString() + ";" + Image + ";" + Collection + ";" + Comment + ";\n";
-            string tempFileContent = File.ReadAllText(Path.Combine(FileSystem.AppDataDirectory, Collection + ".items.txt"));
-            tempFileContent = tempFileContent.Replace(tempDataString, "");
-            File.WriteAllText(Path.Combine(FileSystem.AppDataDirectory, Collection + ".items.txt"), tempFileContent);
+            string strOldText;
+            string n = "";
+            StreamReader sr = File.OpenText(Path.Combine(FileSystem.AppDataDirectory, Collection + ".items.txt"));
+            while ((strOldText = sr.ReadLine()) != null)
+            {
+                if (!strOldText.Contains(ID))
+                {
+                    n += strOldText + Environment.NewLine;
+                }
+            }
+            sr.Close();
+            File.WriteAllText(Path.Combine(FileSystem.AppDataDirectory, Collection + ".items.txt"), n);
         }
 
         public static Item Load(string ID)
