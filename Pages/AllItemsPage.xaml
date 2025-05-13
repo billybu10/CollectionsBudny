@@ -21,7 +21,7 @@
             x:Name="collectionsCollection"
             Margin="20"
             SelectionMode="None"
-            WidthRequest="800">
+            WidthRequest="1000">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
             </CollectionView.ItemsLayout>
