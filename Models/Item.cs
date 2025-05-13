@@ -55,18 +55,21 @@ namespace CollectionsBudny.Models
 
         public void Delete()
         {
-            string strOldText;
-            string n = "";
-            StreamReader sr = File.OpenText(Path.Combine(FileSystem.AppDataDirectory, Collection + ".items.txt"));
-            while ((strOldText = sr.ReadLine()) != null)
+            if (!File.Exists(Path.Combine(FileSystem.AppDataDirectory, Collection + ".items.txt")))
             {
-                if (!strOldText.Contains(ID))
+                string strOldText;
+                string n = "";
+                StreamReader sr = File.OpenText(Path.Combine(FileSystem.AppDataDirectory, Collection + ".items.txt"));
+                while ((strOldText = sr.ReadLine()) != null)
                 {
-                    n += strOldText + Environment.NewLine;
+                    if (!strOldText.Contains(ID))
+                    {
+                        n += strOldText + Environment.NewLine;
+                    }
                 }
+                sr.Close();
+                File.WriteAllText(Path.Combine(FileSystem.AppDataDirectory, Collection + ".items.txt"), n);
             }
-            sr.Close();
-            File.WriteAllText(Path.Combine(FileSystem.AppDataDirectory, Collection + ".items.txt"), n);
         }
 
         public static Item Load(string ID)
