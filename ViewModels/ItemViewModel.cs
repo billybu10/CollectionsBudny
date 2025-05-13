@@ -175,7 +175,7 @@ namespace CollectionsBudny.ViewModels
         {
             IncorrectDataString = "";
             IsAllOk = true;
-            if (String.IsNullOrWhiteSpace(_item.Name) || _item.Name.Contains(','))
+            if (String.IsNullOrWhiteSpace(_item.Name) || _item.Name.Contains(';'))
             {
                 IsAllOk = false;
                 IncorrectDataString += "Incorrect Name \n";
@@ -187,7 +187,7 @@ namespace CollectionsBudny.ViewModels
                 IncorrectDataString += "Incorrect Number \n";
             }
 
-            if (String.IsNullOrWhiteSpace(_item.State) || _item.State.Contains(','))
+            if (String.IsNullOrWhiteSpace(_item.State) || _item.State.Contains(';'))
             {
                 IsAllOk = false;
                 IncorrectDataString += "Incorrect State \n";
@@ -205,13 +205,13 @@ namespace CollectionsBudny.ViewModels
                 IncorrectDataString += "Incorrect Collection \n";
             }
 
-            if ((!String.IsNullOrWhiteSpace(_item.Image) && !File.Exists(_item.Image)) || _item.Image.Contains(','))
+            if ((!String.IsNullOrWhiteSpace(_item.Image) && !File.Exists(_item.Image)) || _item.Image.Contains(';'))
             {
                 IsAllOk = false;
                 IncorrectDataString += "Incorrect Image \n";
             }
 
-            if (_item.Comment.Contains(','))
+            if (_item.Comment.Contains(';'))
             {
                 IsAllOk = false;
                 IncorrectDataString += "Incorrect Comment\n";

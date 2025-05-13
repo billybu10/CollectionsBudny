@@ -37,7 +37,7 @@ namespace CollectionsBudny.Models
                 newFileFilestream.Close();
             }
 
-            string tempDataString = ID + "," + Name + "," + Price.ToString() + "," + State + "," + Rating.ToString() + "," + Image + "," + Collection + "," + Comment + ",\n";
+            string tempDataString = ID + ";" + Name + ";" + Price.ToString() + ";" + State + ";" + Rating.ToString() + ";" + Image + ";" + Collection + ";" + Comment + ";\n";
 
             var lines = File.ReadLines(Path.Combine(FileSystem.AppDataDirectory, Collection + ".items.txt"));
             if (lines.Any(x => x.Split(",")[0] == ID))
@@ -55,7 +55,7 @@ namespace CollectionsBudny.Models
 
         public void Delete()
         {
-            string tempDataString = ID + "," + Name + "," + Price.ToString() + "," + State + "," + Rating.ToString() + "," + Image + "," + Collection + "," + Comment + ",\n";
+            string tempDataString = ID + ";" + Name + ";" + Price.ToString() + ";" + State + ";" + Rating.ToString() + ";" + Image + ";" + Collection + ";" + Comment + ";\n";
             string tempFileContent = File.ReadAllText(Path.Combine(FileSystem.AppDataDirectory, Collection + ".items.txt"));
             tempFileContent = tempFileContent.Replace(tempDataString, "");
             File.WriteAllText(Path.Combine(FileSystem.AppDataDirectory, Collection + ".items.txt"), tempFileContent);
@@ -68,16 +68,16 @@ namespace CollectionsBudny.Models
             foreach (var file in files)
             {
                 var lines = File.ReadLines(file);
-                if (lines.Any(x => x.Split(",")[0] == ID))
+                if (lines.Any(x => x.Split(";")[0] == ID))
                 {
-                    string line = lines.Where(x => x.Split(",")[0] == ID).Single();
-                    string[] fields = line.Split(",");
+                    string line = lines.Where(x => x.Split(";")[0] == ID).Single();
+                    string[] fields = line.Split(";");
                     return
                         new()
                         {
                             ID = ID,
                             Name = fields[1],
-                            Price = Int32.Parse(fields[2]),
+                            Price = (float)Double.Parse(fields[2]),
                             State = fields[3],
                             Rating = Int32.Parse(fields[4]),
                             Image = fields[5],
@@ -102,7 +102,7 @@ namespace CollectionsBudny.Models
                 var lines = File.ReadLines(filename);
                 foreach (var line in lines)
                 {
-                    string[] fields = line.Split(",");
+                    string[] fields = line.Split(";");
                     if (fields.Length > 2)
                     {
                         items.Add(
@@ -110,7 +110,7 @@ namespace CollectionsBudny.Models
                         {
                             ID = fields[0],
                             Name = fields[1],
-                            Price = Int32.Parse(fields[2]),
+                            Price = (float)Double.Parse(fields[2]),
                             State = fields[3],
                             Rating = Int32.Parse(fields[4]),
                             Image = fields[5],
